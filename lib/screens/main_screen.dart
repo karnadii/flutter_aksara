@@ -147,8 +147,8 @@ class MainScreen extends StatelessWidget {
                             controller: bloc.textCtrl,
                             maxLines: null,
                             style: TextStyle(
-                                fontFamily: bloc.mode == MODE.JAVA_TO_LATIN
-                                    ? "Ramayana"
+                                fontFamily: bloc.mode == MODE.JAVA_TO_LATIN && bloc.isKuna
+                                    ? "Ramayana": bloc.mode == MODE.JAVA_TO_LATIN && !bloc.isKuna? "NotosansJavanese"
                                     : "Notosans",
                                 fontSize: bloc.fontSize),
                             decoration: InputDecoration(
@@ -191,7 +191,7 @@ class MainScreen extends StatelessWidget {
                                 fontSize: bloc.fontSize,
                                 fontFamily: bloc.mode == MODE.JAVA_TO_LATIN
                                     ? "Notosans"
-                                    : "Ramayana",
+                                    : bloc.mode != MODE.JAVA_TO_LATIN && bloc.isKuna? "Ramayana":"NotosansJavanese",
                                 color: Colors.grey[100]),
                           ),
                         ),

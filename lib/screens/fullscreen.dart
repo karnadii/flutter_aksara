@@ -14,16 +14,19 @@ class Fullscreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.cyan,
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.white
-        ),
+        iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: Container(
-        padding: EdgeInsets.all(20),
-        child: Text(text, style: TextStyle(fontSize: bloc.fontSize,fontFamily: "Ramayana", color: Colors.white),)
-      ),
+          padding: EdgeInsets.all(20),
+          child: Text(
+            text,
+            style: TextStyle(
+                fontSize: bloc.fontSize,
+                fontFamily: bloc.isKuna ? "Ramayana" : "NotosansJavanese",
+                color: Colors.white),
+          )),
     );
   }
 }
