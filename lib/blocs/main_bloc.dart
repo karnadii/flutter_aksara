@@ -8,7 +8,8 @@ class MainBloc extends StatesRebuilder {
   String latinScript = "";
   MODE mode = MODE.LATIN_TO_JAVA;
   TextEditingController textCtrl;
-  bool isMurda = false, isCopas = true, isSpasi = false;
+  double fontSize = 24.0;
+  bool isMurda = false, isCopas = true, isSpasi = true, isKuna = false;
   init() {
     textCtrl = TextEditingController();
   }
@@ -18,16 +19,28 @@ class MainBloc extends StatesRebuilder {
   }
 
   toLatin() {
-    var aksara = AksaraJava();
+    var aksara = AksaraJawaModern();
+
     latinScript = aksara.javaToLatin(javaScript);
     rebuildStates(["main"]);
   }
 
   toJava() {
-    var aksara = AksaraJava();
-    javaScript = aksara.latinToJava(latinScript,
-        isMurdha: isMurda, isCopas: isCopas, isSpasi: isSpasi);
+    var aksara;
+
+    if (isKuna) {
+      aksara = AksaraJawaKuna();
+    } else {
+      aksara = AksaraJawaModern();
+    }
+    javaScript = aksara.latinToJava(latinScript);
     rebuildStates(["main"]);
+  }
+
+  onFontChanged(double val){
+    fontSize = val;
+    rebuildStates(["main","setting"]);
+
   }
 }
 

@@ -4,10 +4,10 @@ packages:
   aksara:
     dependency: "direct main"
     description:
-      name: aksara
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.2"
+      path: "../../plugins/aksara"
+      relative: true
+    source: path
+    version: "0.0.3"
   archive:
     dependency: transitive
     description:

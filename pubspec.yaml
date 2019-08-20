@@ -1,6 +1,6 @@
 name: flutter_aksara
 description: Aplikasi transliterasi aksara di nusantara ke huruf latin dan sebaliknya.
-version: 1.0.0+1
+version: 1.0.1+2
 environment:
   sdk: ">=2.1.0 <3.0.0"
 
@@ -8,7 +8,8 @@ dependencies:
   flutter:
     sdk: flutter
   states_rebuilder: ^1.3.2
-  aksara: ^0.0.2
+  aksara: 
+    path: ../../plugins/aksara
   clipboard_manager: ^0.0.4
   share: ^0.6.2+1
 
@@ -42,16 +43,22 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: NotosansJavanese
-      fonts:
-        - asset: assets/fonts/NotoSansJavanese-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/NotoSansJavanese-Regular.ttf
+    # - family: NotosansJavanese
+    #   fonts:
+    #     - asset: assets/fonts/NotoSansJavanese-Bold.ttf
+    #       weight: 700
+    #     - asset: assets/fonts/NotoSansJavanese-Regular.ttf
     - family: Notosans
       fonts:
         - asset: assets/fonts/NotoSans-Bold.ttf
           weight: 700
         - asset: assets/fonts/NotoSans-Regular.ttf
+    # - family: Pringgandani
+    #   fonts:
+    #     - asset: assets/fonts/Pringgandani.ttf
+    - family: Ramayana
+      fonts:
+        - asset: assets/fonts/Ramayana.ttf
         
   #   - family: Trajan Pro
   #     fonts:

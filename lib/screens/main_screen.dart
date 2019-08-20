@@ -1,6 +1,8 @@
 import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_aksara/blocs/main_bloc.dart';
+import 'package:flutter_aksara/screens/fullscreen.dart';
+import 'package:flutter_aksara/screens/settings_screen.dart';
 import 'package:share/share.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
@@ -24,54 +26,9 @@ class MainScreen extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              showDialog(
-                context: context,
-                builder: (Ctx) => AlertDialog(
-                  contentPadding: EdgeInsets.zero,
-                  content: StateBuilder(
-                    viewModels: [bloc],
-                    tag: "setting",
-                    builder: (_, __) => Container(
-                      height: 170,
-                      padding: new EdgeInsets.all(0.0),
-                      child: new Column(
-                        children: <Widget>[
-                          CheckboxListTile(
-                            value: bloc.isMurda,
-                            title: Text('Mode murdha'),
-                            subtitle: Text("Gunakan aksara Murdha"),
-                            controlAffinity: ListTileControlAffinity.leading,
-                            onChanged: (bool val) {
-                              bloc.isMurda = val;
-                              bloc.rebuildStates(["setting"]);
-                            },
-                          ),
-                          CheckboxListTile(
-                            value: bloc.isCopas,
-                            title: Text('Gunakan è/é'),
-                            subtitle: Text(
-                                "Gunakan 'è'/'é' untuk taling dan 'e' untuk pepet"),
-                            controlAffinity: ListTileControlAffinity.leading,
-                            onChanged: (bool val) {
-                              bloc.isCopas = val;
-                              bloc.rebuildStates(["setting"]);
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  title: Text("Pengaturan"),
-                  actions: <Widget>[
-                    FlatButton(
-                      child: Text("Ok"),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    )
-                  ],
-                ),
-              );
+              Navigator.of(context).push(MaterialPageRoute(
+                  fullscreenDialog: true,
+                  builder: (Context) => SettingScreen()));
             },
           )
         ],
@@ -191,9 +148,9 @@ class MainScreen extends StatelessWidget {
                             maxLines: null,
                             style: TextStyle(
                                 fontFamily: bloc.mode == MODE.JAVA_TO_LATIN
-                                    ? "NotosansJavanese"
+                                    ? "Ramayana"
                                     : "Notosans",
-                                fontSize: 24),
+                                fontSize: bloc.fontSize),
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: bloc.mode == MODE.JAVA_TO_LATIN
@@ -231,11 +188,11 @@ class MainScreen extends StatelessWidget {
                                 ? bloc.latinScript
                                 : bloc.javaScript,
                             style: TextStyle(
-                                fontSize: 24,
+                                fontSize: bloc.fontSize,
                                 fontFamily: bloc.mode == MODE.JAVA_TO_LATIN
                                     ? "Notosans"
-                                    : "NotosansJavanese",
-                                color: Colors.white),
+                                    : "Ramayana",
+                                color: Colors.grey[100]),
                           ),
                         ),
                         Container(
@@ -276,6 +233,16 @@ class MainScreen extends StatelessWidget {
                                   Share.share(bloc.mode == MODE.JAVA_TO_LATIN
                                       ? bloc.latinScript
                                       : bloc.javaScript);
+                                },
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.fullscreen, color: Colors.white),
+                                onPressed: () {
+                                 Navigator.of(context).push(MaterialPageRoute(
+                  fullscreenDialog: true,
+                  builder: (context) => Fullscreen(text:bloc.mode == MODE.JAVA_TO_LATIN
+                                      ? bloc.latinScript
+                                      : bloc.javaScript)));
                                 },
                               )
                             ],
